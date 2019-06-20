@@ -16,7 +16,7 @@ FROM build_base AS server_builder
 # Here we copy the rest of the source code
 COPY . .
 # And compile the project
-RUN CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go install  ./golang-microservice-example
+RUN CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build && go install
 
 FROM scratch
 RUN apk add ca-certificates
