@@ -3,6 +3,8 @@
 This repo provides a `kubectl apply -f kubernetes/` example to show two ping/pong
 services within istio.
 
+_All you need to do is have an istio enabled cluster and run the above command_
+
 This is aimed at someone who has istio installed but wants to generate real traffic.
 
 ![flow](res/flow.gif)
