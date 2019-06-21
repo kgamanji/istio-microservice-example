@@ -18,8 +18,7 @@ COPY . .
 # And compile the project
 RUN CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build && go install
 
-FROM scratch
-RUN apk add ca-certificates
+FROM alpine as runner
 
 COPY --from=server_builder /go/bin/golang-microservice-example /bin/gme
 ENTRYPOINT ["/bin/gme"]
