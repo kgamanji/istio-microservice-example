@@ -1,0 +1,34 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: beta
+  namespace: default
+spec:
+  hosts:
+    - beta
+  tcp:
+    - route:
+        - destination:
+            host: beta
+            port:
+              number: 9000
+
+
+### Below is an example of how you could make this accessible from an external gateway when using istio #####
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: beta
+spec:
+  hosts:
+    - beta.example.com
+  gateways:
+    - mesh
+    - gateway-apps
+  http:
+    - route:
+        - destination:
+            host: beta
+            port:
+              number: 9000

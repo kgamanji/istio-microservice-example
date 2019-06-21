@@ -1,0 +1,34 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: alpha
+  namespace: default
+spec:
+  hosts:
+    - alpha
+  tcp:
+    - route:
+        - destination:
+            host: alpha
+            port:
+              number: 9001
+
+
+### Below is an example of how you could make this accessible from an external gateway when using istio #####
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: alpha
+spec:
+  hosts:
+    - alpha.example.com
+  gateways:
+    - mesh
+    - gateway-apps
+  http:
+    - route:
+        - destination:
+            host: alpha
+            port:
+              number: 9001

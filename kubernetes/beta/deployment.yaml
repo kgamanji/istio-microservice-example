@@ -1,0 +1,29 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: beta
+  namespace: default
+  labels:
+    app: beta
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: beta
+    spec:
+      containers:
+        - name: beta
+          image: tibbar/golang-microservice-example:latest
+          imagePullPolicy: Always
+          command: ["/bin/sh"]
+          args: ["-c", "/bin/gme -s 0.0.0.0:9000 -t alpha:9001"]
+          resources:
+            requests:
+              memory: "0.5Gi"
+            limits:
+              memory: "1Gi"
+          ports:
+            - containerPort: 9000
+              name: grpc
+              protocol: TCP

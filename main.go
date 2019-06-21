@@ -52,7 +52,7 @@ func client(address string, message string) error {
 	defer conn.Close()
 	c := proto.NewMessageClient(conn)
 
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second * 10)
 	defer cancel()
 	r, err := c.SendMessage(ctx, &proto.SendMessageRequest{Message: message})
 	if err != nil {
