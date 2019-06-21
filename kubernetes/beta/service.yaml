@@ -8,7 +8,7 @@ metadata:
     component: service
 spec:
   ports:
-    - name: http-port #important to name for istio
+    - name: grpc-port #important to name for istio
       port: 9000
   selector:
     app: beta
